@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        .header {
+            background-color: aqua;
+            height: 100px;
+        }
+        .search {
+            background-color: pink;
+            height: 400px;
+        }
+        .today {
+            background-color: springgreen;
+            height: 200px;
+        }
+        .forecast {
+            background-color: powderblue;
+            height: 200px;
+        }
+        .citysearch {
+            overflow: hidden;
+        }
+        .cityinput,
+        .historybtn {
+            width: 100%;
+        }
+        #citybtn {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <section class="header">
+        Header
+    </section>
+    <div class="row">
+        <section class="search col-3">
+            <form class="citysearch">
+                <div>
+                    <input class="m-1 cityinput" type="text" placeholder="Enter city...">
+                </div>
+                <button id="citybtn" class="btn-primary m-1" type="submit">Search</button>
+            </form>
+            <div class = "historydiv">
+                <button class="btn-info m-1 historybtn">test</button>
+            </div>
+        </section>
+        <div class="col-9">
+            <section class="today row p-1">
+                TODAY FORECAST
+            </section>
+            <section class="forecast row p-1">
+                5 DAY FORECAST
+            </section>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
