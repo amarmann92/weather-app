@@ -1,13 +1,14 @@
 const history = document.querySelector (".historydiv")
 const today = document.querySelector (".today")
 const forecast = document.querySelector (".forecast")
+const cityinput = document.querySelector(".cityinput")
 
 const api = "462e1590393042b6de4c11d6437c183d";
-let city = "Los Angeles";
-let queryToday = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${api}`;
 
 
-function getCurrent(){
+function getCurrent(city){
+    $(today).empty()
+    let queryToday = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${api}`;
     fetch(queryToday)
     .then (function (response){
         return response.json()
@@ -30,6 +31,7 @@ function getCurrent(){
 
 function fiveforecast(lon, lat) {
     let query = `https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=${lat}&lon=${lon}&exclude=minutely&appid=${api}`
+    $(forecast).empty()
 
     fetch(query)
     .then (function (response){
@@ -41,11 +43,12 @@ function fiveforecast(lon, lat) {
         for (let i = 1; i < 6; i++) {
             const element = data.daily[i];
             const card = $("<div>");
-            const date = $("<h2>");
-            const weather = $("<h4>");
-            const temp = $("<h4>");
-            const wind = $("<h4>");
-            const humidity = $("<h4>");
+            const date = $("<h4>");
+            const weather = $("<p>");
+            const temp = $("<p>");
+            const wind = $("<p>");
+            const humidity = $("<p>");
+            date.text(moment().add(i, "days").format("l"))
             weather.text(element.weather[0].description);
             temp.text(element.temp.day);
             wind.text(element.wind_speed);
@@ -59,4 +62,16 @@ function fiveforecast(lon, lat) {
 }
 
 
-getCurrent()
+document.querySelector(".citysearch").addEventListener("submit", (e)=> {
+    e.preventDefault()
+    const city = cityinput.value;
+    getCurrent(city)
+    cityinput.value = ""
+    const button = $("<button>")
+    button.text(city).addClass("btn-info m-1 historybtn")
+    $(history).append(button)
+    button.on("click", (e)=> {
+        const prevcity = e.target.textContent
+        getCurrent(prevcity)
+    })
+})
